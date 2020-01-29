@@ -1,0 +1,12 @@
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+
+const App = () => {
+  return (
+    <div>
+      <header>Weather stuff!</header>
+    </div>
+  );
+};
+
+ReactDOM.render(<App />, document.getElementById("root"));
