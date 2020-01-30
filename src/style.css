@@ -1,0 +1,24 @@
+.summary-card {
+  max-width: 100px;
+  text-align: center;
+}
+
+.summary-card img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.temperatures {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-around;
+}
+
+#high {
+  color: red;
+}
+
+#low {
+  color: grey;
+}
