@@ -31749,13 +31749,41 @@ const WeatherCard = () => {
   const [symbol, setSymbol] = (0, _react.useState)();
   const [low, setLow] = (0, _react.useState)("40°c");
   const [high, setHigh] = (0, _react.useState)("60°c");
-  const key = "f1d6f0494b1aa8c480e75e2793396bde";
+  const [city, setCity] = (0, _react.useState)("London");
+  const [country, setCountry] = (0, _react.useState)("UK");
+  const key = "f1d6f0494b1aa8c480e75e2793396bde"; //   const forecast = `api.openweathermap.org/data/2.5/forecast?q=${city},${country}`;
+
   (0, _react.useEffect)(() => {
-    fetch(`http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=${key}`).then(response => response.json()).then(data => console.log(data));
+    fetch(`http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=${key}`).then(response => response.json()) //   .then(data => console.log(data))
+    .then(updateWeather);
   }, []);
+
+  const updateWeather = data => {
+    console.log(data);
+    setCity(data.city.name); // setLow(data.list[0].main.temp_min);
+    // setHigh(data.list[0].main.temp_max);
+
+    let lowTemp = data.list[0].main.temp_min;
+    let highTemp = data.list[0].main.temp_max;
+    let lowInput = createTemp(lowTemp);
+    let highInput = createTemp(highTemp);
+    console.log(lowInput);
+    console.log(highInput);
+    setLow(Math.round(lowInput));
+    setHigh(Math.round(highInput));
+  };
+
+  const createTemp = input => {
+    console.log(input);
+    let result = (input - 32) * (5 / 9);
+    return result;
+  };
+
   return _react.default.createElement("div", {
     className: "summary-card"
   }, _react.default.createElement("div", {
+    className: "day-name"
+  }, city), _react.default.createElement("div", {
     className: "day-name"
   }, _react.default.createElement("p", null, day)), _react.default.createElement("img", {
     src: "https://www.pngitem.com/pimgs/m/73-734609_storm-weather-symbol-of-a-dark-cloud-with.png",
@@ -31819,7 +31847,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49343" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64368" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
