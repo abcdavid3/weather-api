@@ -7,6 +7,10 @@ const App = () => {
     <div>
       <header>Weather stuff!</header>
       <WeatherCard />
+      <WeatherCard />
+      <WeatherCard />
+      <WeatherCard />
+      <WeatherCard />
     </div>
   );
 };

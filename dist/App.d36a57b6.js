@@ -31744,37 +31744,34 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-const WeatherCard = () => {
+const WeatherCard = props => {
   const [day, setDay] = (0, _react.useState)("Monday");
   const [symbol, setSymbol] = (0, _react.useState)();
   const [low, setLow] = (0, _react.useState)("40°c");
   const [high, setHigh] = (0, _react.useState)("60°c");
   const [city, setCity] = (0, _react.useState)("London");
   const [country, setCountry] = (0, _react.useState)("UK");
+  const [days, setDays] = (0, _react.useState)([]);
   const key = "f1d6f0494b1aa8c480e75e2793396bde"; //   const forecast = `api.openweathermap.org/data/2.5/forecast?q=${city},${country}`;
 
   (0, _react.useEffect)(() => {
-    fetch(`http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=${key}`).then(response => response.json()) //   .then(data => console.log(data))
+    fetch(`http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=${key}`).then(response => response.json()) // .then(data => console.log(data))
     .then(updateWeather);
   }, []);
 
   const updateWeather = data => {
     console.log(data);
-    setCity(data.city.name); // setLow(data.list[0].main.temp_min);
-    // setHigh(data.list[0].main.temp_max);
-
-    let lowTemp = data.list[0].main.temp_min;
-    let highTemp = data.list[0].main.temp_max;
-    let lowInput = createTemp(lowTemp);
-    let highInput = createTemp(highTemp);
-    console.log(lowInput);
-    console.log(highInput);
+    setCity(data.city.name);
+    const lowTemp = data.list[0].main.temp_min;
+    const highTemp = data.list[0].main.temp_max;
+    const lowInput = createTemp(lowTemp);
+    const highInput = createTemp(highTemp);
     setLow(Math.round(lowInput));
     setHigh(Math.round(highInput));
+    setDays(data);
   };
 
   const createTemp = input => {
-    console.log(input);
     let result = (input - 32) * (5 / 9);
     return result;
   };
@@ -31815,7 +31812,7 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 const App = () => {
-  return _react.default.createElement("div", null, _react.default.createElement("header", null, "Weather stuff!"), _react.default.createElement(_WeatherCard.default, null));
+  return _react.default.createElement("div", null, _react.default.createElement("header", null, "Weather stuff!"), _react.default.createElement(_WeatherCard.default, null), _react.default.createElement(_WeatherCard.default, null), _react.default.createElement(_WeatherCard.default, null), _react.default.createElement(_WeatherCard.default, null), _react.default.createElement(_WeatherCard.default, null));
 };
 
 _reactDom.default.render(_react.default.createElement(App, null), document.getElementById("root"));
@@ -31847,7 +31844,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64368" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52026" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
