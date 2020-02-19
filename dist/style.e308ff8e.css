@@ -28,5 +28,16 @@
   justify-content: space-between;
 }
 
+.detail {
+  display: flex;
+  border: 5px solid #000000;
+  margin: 5px;
+}
+
+/* .detail-temp {
+  display: flex;
+  justify-content: space-between;
+} */
+
 
 /*# sourceMappingURL=/style.e308ff8e.css.map */
