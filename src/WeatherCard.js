@@ -29,7 +29,7 @@ const WeatherCard = props => {
           options.map(item => (
             <div className="details" key={item}>
               <Details
-                hours={item.dt_txt}
+                hours={item.dt_txt.slice(10, 16)}
                 max_temp={item.main.temp_max}
                 min_temp={item.main.temp_min}
               />

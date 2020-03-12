@@ -17,8 +17,13 @@ const App = () => {
 
   useEffect(() => {
     const updateWeather = data => {
+      console.log(data);
       setInfo(data);
       setCity(data.city.name);
+      let newHighTemp = 0;
+      data.list.forEach(input => {
+        newHighTemp += input.main.temp_max;
+      });
       const lowTemp = data.list[0].main.temp_min;
       const highTemp = data.list[0].main.temp_max;
       const lowInput = createTemp(lowTemp);
@@ -39,26 +44,41 @@ const App = () => {
     return result;
   };
 
+  // info.forEach(input => {
+  //   let counter = 0;
+  //   let allTemp = 0;
+  //   counter += 1;
+  //   allTemp += input.list;
+  //   return allTemp / counter;
+  // });
+
+  const changeDay = input => {
+    let change = new Date(input);
+    change.getDay();
+  };
+
   return (
     <div>
       <header>Weather stuff!</header>
-      {info ? (
-        info.list.map(item => (
-          <div className="container" key={item}>
-            <WeatherCard
-              city={city}
-              day={day}
-              high={high}
-              low={low}
-              info={info && info.list}
-            />
+      <div className="container">
+        {info ? (
+          info.list.map(item => (
+            <div className="container" key={day}>
+              <WeatherCard
+                city={city}
+                day={String(new Date(item.dt_txt)).slice(0, 4)}
+                high={high}
+                low={low}
+                info={info && info.list}
+              />
+            </div>
+          ))
+        ) : (
+          <div className="container">
+            <p>no</p>
           </div>
-        ))
-      ) : (
-        <div className="container">
-          <p>no</p>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

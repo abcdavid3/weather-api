@@ -1,6 +1,7 @@
 .summary-card {
   max-width: 100px;
   text-align: center;
+  margin: 5px;
 }
 
 .summary-card img {
@@ -30,7 +31,7 @@
 
 .detail {
   display: flex;
-  border: 5px solid #000000;
+  border: 1px solid #000000;
   margin: 5px;
 }
 

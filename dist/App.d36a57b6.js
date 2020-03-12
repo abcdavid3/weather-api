@@ -34441,7 +34441,7 @@ const WeatherCard = props => {
     className: "details",
     key: item
   }, _react.default.createElement(_details.default, {
-    hours: item.dt_txt,
+    hours: item.dt_txt.slice(10, 16),
     max_temp: item.main.temp_max,
     min_temp: item.main.temp_min
   }))) : _react.default.createElement("div", null)));
@@ -34476,8 +34476,13 @@ const App = () => {
 
   (0, _react.useEffect)(() => {
     const updateWeather = data => {
+      console.log(data);
       setInfo(data);
       setCity(data.city.name);
+      let newHighTemp = 0;
+      data.list.forEach(input => {
+        newHighTemp += input.main.temp_max;
+      });
       const lowTemp = data.list[0].main.temp_min;
       const highTemp = data.list[0].main.temp_max;
       const lowInput = createTemp(lowTemp);
@@ -34492,20 +34497,34 @@ const App = () => {
   const createTemp = input => {
     let result = (input - 32) * (5 / 9);
     return result;
+  }; // info.forEach(input => {
+  //   let counter = 0;
+  //   let allTemp = 0;
+  //   counter += 1;
+  //   allTemp += input.list;
+  //   return allTemp / counter;
+  // });
+
+
+  const changeDay = input => {
+    let change = new Date(input);
+    change.getDay();
   };
 
-  return _react.default.createElement("div", null, _react.default.createElement("header", null, "Weather stuff!"), info ? info.list.map(item => _react.default.createElement("div", {
+  return _react.default.createElement("div", null, _react.default.createElement("header", null, "Weather stuff!"), _react.default.createElement("div", {
+    className: "container"
+  }, info ? info.list.map(item => _react.default.createElement("div", {
     className: "container",
-    key: item
+    key: day
   }, _react.default.createElement(_WeatherCard.default, {
     city: city,
-    day: day,
+    day: String(new Date(item.dt_txt)).slice(0, 4),
     high: high,
     low: low,
     info: info && info.list
   }))) : _react.default.createElement("div", {
     className: "container"
-  }, _react.default.createElement("p", null, "no")));
+  }, _react.default.createElement("p", null, "no"))));
 };
 
 _reactDom.default.render(_react.default.createElement(App, null), document.getElementById("root"));
@@ -34537,7 +34556,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51574" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52990" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
